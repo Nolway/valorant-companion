@@ -1,0 +1,34 @@
+services:
+  node:
+    image: 'ghcr.io/Nolway/valorant-companion:bot-${TAG}'
+    restart: always
+    environment:
+      NODE_ENV: 'production'
+      MONGODB_USER: $MONGODB_USER
+      MONGODB_PASS: $MONGODB_PASS
+      MONGODB_DBNAME: $MONGODB_DBNAME
+      BOT_TOKEN: $BOT_TOKEN
+    depends_on:
+      - mongo
+    networks:
+      - project
+      - default
+  mongo:
+    image: mongo:7.0
+    restart: always
+    environment:
+      MONGO_INITDB_DATABASE: $MONGODB_DBNAME
+      MONGO_INITDB_ROOT_USERNAME: $MONGODB_USER
+      MONGO_INITDB_ROOT_PASSWORD: $MONGODB_PASS
+    volumes:
+      - mongodata:/data/db
+    networks:
+      - project
+networks:
+  project:
+    internal: true
+  default:
+    external:
+      name: gateway
+volumes:
+  mongodata:

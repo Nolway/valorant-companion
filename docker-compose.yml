@@ -1,0 +1,38 @@
+services:
+  node:
+    build: 'docker/node'
+    restart: on-failure
+    command: sh -c "yarn install && npm run typesafe-i18n && yarn run dev"
+    ports:
+      - 9229:9229
+    environment:
+      NODE_ENV: 'developement'
+      MONGODB_USER: $MONGODB_USER
+      MONGODB_PASS: $MONGODB_PASS
+      MONGODB_DBNAME: $MONGODB_DBNAME
+      BOT_TOKEN: $BOT_TOKEN
+    volumes:
+      - ./:/home/node/app
+    depends_on:
+      - mongo
+  mongo:
+    image: mongo:7.0
+    restart: on-failure
+    environment:
+      MONGO_INITDB_DATABASE: $MONGODB_DBNAME
+      MONGO_INITDB_ROOT_USERNAME: $MONGODB_USER
+      MONGO_INITDB_ROOT_PASSWORD: $MONGODB_PASS
+    volumes:
+      - mongodata:/data/db
+  mongo-express:
+    image: mongo-express:latest
+    environment:
+      - ME_CONFIG_MONGODB_ADMINUSERNAME=$MONGODB_USER
+      - ME_CONFIG_MONGODB_ADMINPASSWORD=$MONGODB_PASS
+      - ME_CONFIG_MONGODB_SERVER=mongo
+    ports:
+      - 8081:8081
+    depends_on:
+      - mongo
+volumes:
+  mongodata:

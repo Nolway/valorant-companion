@@ -1,0 +1,70 @@
+{
+  "name": "valorant-companion",
+  "version": "1.0.0",
+  "description": "Valorant Companion is a Discord bot that helps you to find/join a game, look your market, and more...",
+  "main": "dist/main.js",
+  "type": "module",
+  "scripts": {
+    "dev": "concurrently --names \"bot,typesafe-i18n\" -c \"auto\" \"tsx watch --inspect=0.0.0.0:9229 src/main.ts\" \"npm run typesafe-i18n:watch\"",
+    "prod": "node dist/main.js",
+    "build": "tsc -p tsconfig.build.json",
+    "typecheck": "tsc --project tsconfig.json --noEmit --pretty false",
+    "lint": "eslint",
+    "lint:fix": "npm run lint --fix",
+    "prepare": "husky",
+    "typesafe-i18n": "typesafe-i18n --no-watch",
+    "typesafe-i18n:watch": "typesafe-i18n",
+    "test": "jest --forceExit",
+    "test:debug": "node --inspect-brk=0.0.0.0:9229 ./node_modules/jest/bin/jest.js --runInBand --testTimeout=1200000",
+    "test:watch": "jest --watchAll --runInBand",
+    "test:watch:debug": "node --inspect-brk=0.0.0.0:9229 ./node_modules/jest/bin/jest.js --watchAll --runInBand --testTimeout=1200000"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Nolway/valorant-companion.git"
+  },
+  "author": "Nolway & contributers",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/Nolway/valorant-companion/issues"
+  },
+  "homepage": "https://github.com/Nolway/valorant-companion#readme",
+  "lint-staged": {
+    "*.{js,ts,json}": [
+      "eslint --fix"
+    ]
+  },
+  "resolutions": {
+    "strip-ansi": "^6.0.1"
+  },
+  "dependencies": {
+    "@discordx/importer": "^1.3.1",
+    "@discordx/utilities": "^7.0.1",
+    "discord.js": "^14.15.3",
+    "discordx": "^11.12.0",
+    "mongoose": "^8.4.4",
+    "node-emoji": "^2.1.3",
+    "typesafe-i18n": "^5.26.2",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.6.0",
+    "@stylistic/eslint-plugin": "^2.3.0",
+    "@total-typescript/ts-reset": "^0.5.1",
+    "@types/eslint__js": "^8.42.3",
+    "@types/jest": "^29.5.12",
+    "@types/node": "^20.14.9",
+    "concurrently": "^8.2.2",
+    "eslint": "^9.6.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-no-type-assertion": "^1.3.0",
+    "husky": "^9.0.11",
+    "jest": "^29.7.0",
+    "lint-staged": "^15.2.7",
+    "prettier": "^3.3.2",
+    "ts-jest": "^29.1.5",
+    "tsx": "^4.16.0",
+    "typescript": "^5.5.3",
+    "typescript-eslint": "^7.15.0"
+  }
+}
