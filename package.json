@@ -42,6 +42,7 @@
     "@discordx/utilities": "^7.0.1",
     "discord.js": "^14.15.3",
     "discordx": "^11.12.0",
+    "ioredis": "^5.4.1",
     "mongoose": "^8.4.4",
     "node-emoji": "^2.1.3",
     "typesafe-i18n": "^5.26.2",

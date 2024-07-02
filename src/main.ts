@@ -1,8 +1,19 @@
 import { IntentsBitField } from "discord.js";
 import { Client } from "discordx";
 import { importx } from "@discordx/importer";
+import { z } from "zod";
 
-const botToken = process.env.BOT_TOKEN;
+export const envConfig = z.object({
+    BOT_TOKEN: z.string(),
+    MONGODB_USER: z.string(),
+    MONGODB_PASS: z.string(),
+    MONGODB_DBNAME: z.string(),
+    REDIS_HOST: z.string(),
+    REDIS_PORT: z.string(),
+    REDIS_PASS: z.string(),
+}).parse(process.env);
+
+const botToken = envConfig.BOT_TOKEN;
 
 export const client = new Client({
     intents: [

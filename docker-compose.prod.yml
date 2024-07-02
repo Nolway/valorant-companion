@@ -8,6 +8,9 @@ services:
       MONGODB_PASS: $MONGODB_PASS
       MONGODB_DBNAME: $MONGODB_DBNAME
       BOT_TOKEN: $BOT_TOKEN
+      REDIS_HOST: $REDIS_HOST
+      REDIS_PORT: $REDIS_PORT
+      REDIS_PASS: $REDIS_PASS
     depends_on:
       - mongo
     networks:
@@ -20,8 +23,16 @@ services:
       MONGO_INITDB_DATABASE: $MONGODB_DBNAME
       MONGO_INITDB_ROOT_USERNAME: $MONGODB_USER
       MONGO_INITDB_ROOT_PASSWORD: $MONGODB_PASS
+    networks:
+      - project
+  redis:
+    image: redis:7.2
+    restart: always
     volumes:
-      - mongodata:/data/db
+      - redisdata:/data
+    environment:
+      - REDIS_PASSWORD=${REDIS_PASS}
+      - REDIS_PORT=${REDIS_PORT}
     networks:
       - project
 networks:

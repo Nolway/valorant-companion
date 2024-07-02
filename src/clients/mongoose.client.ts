@@ -1,8 +1,9 @@
 import mongoose from "mongoose";
+import { envConfig } from "../main";
 
 mongoose
-    .connect(`mongodb://${process.env.MONGODB_USER}:${process.env.MONGODB_PASS}@mongo`, {
-        dbName: process.env.MONGODB_DBNAME,
+    .connect(`mongodb://${envConfig.MONGODB_USER}:${envConfig.MONGODB_PASS}@mongo`, {
+        dbName: envConfig.MONGODB_DBNAME,
     })
     .then(() => console.log("MongoDB connected"))
     .catch((err) => console.log(`MongoDB connection failed ${err}`));
