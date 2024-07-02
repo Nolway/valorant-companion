@@ -1,4 +1,4 @@
-import Redis from "ioredis";
+import { Redis } from "ioredis";
 import { envConfig } from "../main";
 
 export const redis = new Redis({

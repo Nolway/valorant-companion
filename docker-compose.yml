@@ -2,7 +2,7 @@ services:
   node:
     build: 'docker/node'
     restart: on-failure
-    command: sh -c "yarn install && npm run typesafe-i18n && yarn run dev"
+    command: sh -c "yarn install && yarn run typesafe-i18n && yarn run dev"
     ports:
       - 9229:9229
     environment:
