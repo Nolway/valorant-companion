@@ -1,6 +1,6 @@
 import { IntentsBitField } from "discord.js";
 import { Client } from "discordx";
-import { importx } from "@discordx/importer";
+import { dirname, importx } from "@discordx/importer";
 import { z } from "zod";
 
 export const envConfig = z.object({
@@ -45,6 +45,7 @@ async function start(): Promise<void> {
         throw new Error("Missing BOT_TOKEN env variable");
     }
 
+    const __dirname = dirname(import.meta.url);
     await importx(`${__dirname}/{commands,events}/**/*.{ts,js}`);
 
     await client.login(botToken);
