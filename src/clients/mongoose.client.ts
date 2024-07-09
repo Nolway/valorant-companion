@@ -6,6 +6,9 @@ mongoose
         dbName: envConfig.MONGODB_DBNAME,
     })
     .then(() => console.log("MongoDB connected"))
-    .catch((err) => console.log(`MongoDB connection failed ${err}`));
+    .catch((err) => {
+        console.log(`MongoDB connection failed ${err}`);
+        process.exit(1);
+    });
 
 export const MongooseClient = mongoose.connection;
