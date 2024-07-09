@@ -7,7 +7,7 @@ export const OnlyDM: GuardFunction<CommandInteraction> = async (
     client,
     next,
 ) => {
-    if (args.channel?.type === ChannelType.DM) {
+    if (!args.channel || args.channel.type === ChannelType.DM) {
         await next();
     } else {
         const translate = getTranslate(args.locale);
